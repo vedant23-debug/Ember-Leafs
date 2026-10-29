@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember &amp; Leaf – Exceptional tea. Extraordinary coffee.</title>
+<meta name="description" content="Loose-leaf tea and specialty coffee beans, delivered once or on repeat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#shop">Skip to products</a>
+<p class="bar">Demo storefront: products are sample data and checkout is not connected yet.</p>
+
+<header class="head">
+  <a class="logo" href="#top">Ember &amp; Leaf</a>
+  <nav aria-label="Main">
+    <a href="#shop" data-cat="tea">Tea</a>
+    <a href="#shop" data-cat="coffee">Coffee</a>
+    <a href="#subscribe">Subscriptions</a>
+    <a href="#journal">Journal</a>
+  </nav>
+  <button class="cart-btn" id="open-cart" aria-controls="cart">Cart (<span id="count">0</span>)</button>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="Shop by tea or coffee">
+    <div class="panel tea" tabindex="0">
+      <h1>Exceptional tea.</h1>
+      <p>Loose leaf from small estates, picked for aroma and clarity in the cup.</p>
+      <a class="btn" href="#shop" data-cat="tea">Shop Tea</a>
+    </div>
+    <div class="panel coffee" tabindex="0">
+      <h1>Extraordinary coffee.</h1>
+      <p>Whole beans roasted to bring out the origin, not to hide it.</p>
+      <a class="btn" href="#shop" data-cat="coffee">Shop Coffee</a>
+    </div>
+  </section>
+
+  <section class="wrap" id="shop">
+    <h2>The shop</h2>
+    <p class="muted">Sample catalog for development. Prices are placeholders in INR.</p>
+    <div class="tools">
+      <div class="chips" role="group" aria-label="Category">
+        <button data-filter="all" aria-pressed="true">All</button>
+        <button data-filter="tea" aria-pressed="false">Tea</button>
+        <button data-filter="coffee" aria-pressed="false">Coffee</button>
+      </div>
+      <label class="sr" for="q">Search products</label>
+      <input id="q" type="search" placeholder="Search name, origin or flavour">
+      <label class="sr" for="sort">Sort</label>
+      <select id="sort">
+        <option value="name">Name</option>
+        <option value="low">Price: low to high</option>
+        <option value="high">Price: high to low</option>
+      </select>
+    </div>
+    <p id="result-count" class="muted" aria-live="polite"></p>
+    <div id="grid" class="grid"></div>
+  </section>
+
+  <section class="band" id="subscribe">
+    <div class="wrap two">
+      <div>
+        <h2>Delivered on repeat</h2>
+        <p>Pick a favourite, choose how often it arrives, and change or cancel before the next cycle. You see the full recurring amount before anything is confirmed.</p>
+      </div>
+      <form id="sub-form" class="box">
+        <label for="sub-product">Product</label>
+        <select id="sub-product"></select>
+        <label for="sub-freq">Frequency</label>
+        <select id="sub-freq">
+          <option value="Every week">Every week</option>
+          <option value="Every 2 weeks">Every 2 weeks</option>
+          <option value="Every month" selected>Every month</option>
+        </select>
+        <p id="sub-summary" class="sum"></p>
+        <label class="check"><input type="checkbox" id="sub-consent"> I agree to be charged this amount on this schedule until I cancel.</label>
+        <button class="btn solid" id="sub-go" disabled>Start subscription</button>
+        <p id="sub-msg" class="muted" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="wrap" id="journal">
+    <h2>Brewing guides</h2>
+    <div class="guides">
+      <article><h3>Brewing green tea</h3><p>Use water around 75–80 °C and steep for about two minutes. Hotter water brings out bitterness.</p></article>
+      <article><h3>Brewing black tea</h3><p>Fully boiling water, three to four minutes. Taste at three and adjust.</p></article>
+      <article><h3>Pour-over coffee</h3><p>About 1:16 coffee to water, medium-fine grind, finish in under four minutes.</p></article>
+    </div>
+  </section>
+
+  <section class="wrap" id="reviews">
+    <h2>Reviews</h2>
+    <p class="muted">No reviews yet. Verified customer reviews will appear here once orders have been placed.</p>
+  </section>
+
+  <section class="band sage">
+    <div class="wrap">
+      <h2>The occasional letter</h2>
+      <form id="news" class="news">
+        <label class="sr" for="email">Email address</label>
+        <input id="email" type="email" required placeholder="you@example.com">
+        <button class="btn solid">Subscribe</button>
+        <label class="check full"><input type="checkbox" id="news-consent" required> I agree to receive emails from Ember &amp; Leaf and can unsubscribe at any time.</label>
+        <p id="news-msg" class="muted" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <strong>Ember &amp; Leaf</strong>
+    <nav aria-label="Footer"><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></nav>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside id="cart" class="cart" aria-label="Shopping cart" aria-hidden="true">
+  <div class="cart-top"><h2>Your cart</h2><button id="close-cart" aria-label="Close cart">Close</button></div>
+  <div id="cart-items"></div>
+  <div class="cart-foot">
+    <p class="total"><span>Subtotal</span><strong id="subtotal">₹0</strong></p>
+    <p class="muted">Shipping and tax are calculated at checkout by the server.</p>
+    <button class="btn solid" id="checkout">Checkout</button>
+    <p id="cart-msg" class="muted" role="status"></p>
+  </div>
+</aside>
+<script src="script.js"></script>
+</body>
+</html>
